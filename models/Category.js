@@ -5,31 +5,7 @@ const sequelize = require('../config/connection.js');
 class Category extends Model {}
 
 Category.init({
-    shirts: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    shorts: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    shoes: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    hats: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
-    },
-    music: {
+    id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
