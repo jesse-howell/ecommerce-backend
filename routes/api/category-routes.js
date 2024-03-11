@@ -7,9 +7,9 @@ const { Category, Product } = require("../../models");
 router.get("/", async (req, res) => {
   const categoryData = await Category.findAll({ include: [{
     model: Product,
-  }]});
+  }] });
     res.json(categoryData)
-    
+
 
   // console.log(categoryData.every((category) => category instanceof Category));
   // console.log("All categories:", JSON.stringify(categories, null, 2));
@@ -18,12 +18,7 @@ router.get("/", async (req, res) => {
 
   // find all categories
   // be sure to include its associated Products
-  const driverData = await Driver.findAll({ include: [{ 
-    model: License,
-    attributes: ['license_number'],
-  }] });
-  res.json(driverData);
-});
+  
 });
 
 router.get("/:id", async (req, res) => {
