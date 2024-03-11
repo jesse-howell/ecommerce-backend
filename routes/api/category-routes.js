@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { SELECT } = require("sequelize/lib/query-types");
+const { SELECT } = require("sequelize/types/query-types");
 const { Category, Product } = require("../../models");
 
 // The `/api/categories` endpoint
