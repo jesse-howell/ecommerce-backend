@@ -9,6 +9,7 @@ router.get("/", async (req, res) => {
   }).catch((err) => {
     res.json(err);
   });
+  res.json(tagData);
   // find all tags
   // be sure to include its associated Product data
 });

@@ -10,6 +10,7 @@ router.get("/", async (req, res) => {
   }).catch((err) => {
     res.json(err);
   });
+  res.json(productData);
   // find all products
   // be sure to include its associated Category and Tag data
 });
