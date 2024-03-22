@@ -19,7 +19,10 @@ This project was built to understand and demonstrate the workings of a MySQL dat
 ## Usage
 
 1. Install the appropriate npm packages listed in the JSON file.
-2. Start the server then use HTTPie or a similar application to view and edit the database.
+2. Seed the database then start the server.
+3. Use HTTPie or a similar application to view and edit the database.
+
+[![ecommerce-backend-walkthrough](/assets/ecommerce-backend-screenshot.png)](https://youtu.be/D8vG8OoObgM 'E-commerce Backend Walkthrough')
 
 ## Contact Me
 
