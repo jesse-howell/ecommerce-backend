@@ -9,7 +9,9 @@ require('dotenv').config();
       await db.execute(`DROP DATABASE IF EXISTS ${DB_NAME}`);
       console.log(`${DB_NAME} dropped`);
     }
-    const [header] = await db.execute(`CREATE DATABASE IF NOT EXISTS ${DB_NAME}`);
+    const [header] = await db.execute(
+      `CREATE DATABASE IF NOT EXISTS ${DB_NAME}`
+    );
 
     console.log(`${DB_NAME} ${!header.warningStatus ? 'created' : 'exists'}`);
     process.exit(0);
