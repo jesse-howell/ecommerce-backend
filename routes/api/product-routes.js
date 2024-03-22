@@ -3,7 +3,7 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
 
-// get all products
+// GET all products including its associated category and tag data
 router.get('/', async (req, res) => {
   const productData = await Product.findAll({
     include: [{ model: Category }, { model: Tag }],
@@ -11,11 +11,9 @@ router.get('/', async (req, res) => {
     res.json(err);
   });
   res.json(productData);
-  // find all products
-  // be sure to include its associated Category and Tag data
 });
 
-// get one product
+// GET one product by id, including its associated category and tag data
 router.get('/:id', async (req, res) => {
   try {
     const productData = await Product.findByPk(req.params.id, {
@@ -29,28 +27,38 @@ router.get('/:id', async (req, res) => {
   } catch (err) {
     res.status(500).json(err);
   }
-  // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
 });
 
-// create new product
+// POST a new product
 router.post('/', async (req, res) => {
-  /* req.body should look like this...
-    {
-      product_name: "Basketball",
-      price: 200.00,
-      stock: 3,
-      tagIds: [1, 2, 3, 4]
-    }
-  */
   try {
     const product = await Product.create(req.body);
-    // if there's product tags, we need to create pairings by using the setTags method
+    if (!product) {
+      res.status(404).json({ message: 'No product with this id!' });
+      return;
+    }
     if (req.body.tagIds) {
       await product.setTags(req.body.tagIds);
       await product.save();
       return res.status(200).json(await product.getTags());
     }
+    const tagIds = req.body.tagIds;
+
+    if (tagIds && tagIds.length) {
+      // Map the tag IDs to product_tag objects
+      const productTagIdPairs = tagIds.map((tag_id) => {
+        return {
+          product_id: product.id,
+          tag_id,
+        };
+      });
+
+      // Create the product-tag associations
+      await ProductTag.bulkCreate(productTagIdPairs);
+    }
+
+    // Respond with the new product
+    res.status(200).json(product);
     // if no product tags, just respond
     return res.status(200).json(product);
   } catch (err) {
